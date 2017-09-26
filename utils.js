@@ -78,6 +78,11 @@ var utils = {
             */
   },
 
+  rectIntersect2: function(r0, r1){
+    return utils.rangeIntersect(r0.x - r0.width/2, r0.x + r0.width, r1.x - r1.width/2, r1.x + r1.width) &&
+           utils.rangeIntersect(r0.y - r0.height/2, r0.y + r0.height, r1.y - r1.height/2, r1.y + r1.height);
+  },
+
   blockRectangles: function(r0, r1){
     var cx0 = r0.x + (r0.width/2),
         cy0 = r0.y + (r0.height/2),
@@ -94,18 +99,18 @@ var utils = {
       var overlapx = tWidth - absDx,
           overlapy = tHeight - absDy;
       if(absDy > absDx){
-        if(dy > 0){
+        if(dy > 0){ //top
           r0.y = r0.y - overlapy;
           return 1;
-        } else {
+        } else { //down
           r0.y = r0.y + overlapy;
           return 3;
         }
       } else {
-        if(dx > 0){
+        if(dx > 0){ //left
           r0.x = r0.x - overlapx;
           return 0;
-        } else {
+        } else { //right
           r0.x = r0.x + overlapx;
           return 2;
         }
